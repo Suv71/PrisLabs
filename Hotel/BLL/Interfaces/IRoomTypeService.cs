@@ -1,16 +1,14 @@
 ﻿using Model;
-using Model.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Interfaces
+namespace BLL.Interfaces
 {
-    public interface IRoomTypeRepository
+    public interface IRoomTypeService
     {
         IEnumerable<RoomType> GetAll();
-        RoomType GetById(RoomTypes id);
     }
 }

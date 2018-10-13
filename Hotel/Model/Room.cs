@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Model
         public Guid Id { get; set; }
         public int Number { get; set; }
         public int Capacity { get; set; }
-        public Guid RoomTypeId { get; set; }
+        public RoomTypes RoomTypeId { get; set; }
         public double Cost { get; set; }
 
         public Room()
