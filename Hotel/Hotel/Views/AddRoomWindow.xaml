@@ -4,18 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hotel.Views"
+        xmlns:model="clr-namespace:Model;assembly=Model"
         mc:Ignorable="d"
         Title="Добавление комнаты" Height="368.067" Width="433.193">
     <Grid>
-        <Button Content="Добавить" Command="{Binding AddRoomCommand}" HorizontalAlignment="Left" Margin="179,296,0,0" VerticalAlignment="Top" Width="75"/>
-        <ComboBox HorizontalAlignment="Left" Margin="262,168,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding RoomTypeValues}" SelectedValue="{Binding ElementName=Room, Path=RoomTypeId}"/>
         <Label Content="Тип комнаты" HorizontalAlignment="Left" Margin="63,168,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747" />
         <Label Content="Вместимость" HorizontalAlignment="Left" Margin="63,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747"/>
         <Label Content="Номер" HorizontalAlignment="Left" Margin="63,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="262,47,0,0" TextWrapping="Wrap" Text="{Binding ElementName=Room, Path=Number}" VerticalAlignment="Top" Width="120"/>
-        <ComboBox HorizontalAlignment="Left" Margin="262,110,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding CapacityValues}" SelectedValue="{Binding ElementName=Room, Path=Capacity}"/>
         <Label Content="Общая стоимость" HorizontalAlignment="Left" Margin="63,230,0,0" VerticalAlignment="Top"/>
-        <Label Content="0" HorizontalAlignment="Left" Margin="262,230,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.132,-0.379"/>
 
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="262,47,0,0" TextWrapping="Wrap" Text="{Binding Room.Number}" VerticalAlignment="Top" Width="120" PreviewTextInput="TextBox_PreviewTextInput" />
+        <ComboBox HorizontalAlignment="Left" Margin="262,110,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding CapacityValues}" SelectedValue="{Binding Room.Capacity, Mode=OneWayToSource}" SelectedIndex="0" SelectionChanged="ComboBox_OnSelectionChanged"/>
+        <ComboBox HorizontalAlignment="Left" Margin="262,168,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding RoomTypeValues}" SelectedValuePath="Id" SelectedValue="{Binding Room.RoomTypeId, Mode=OneWayToSource}" DisplayMemberPath="Title" SelectedIndex="0" SelectionChanged="ComboBox_OnSelectionChanged"/>
+        <Label Content="{Binding Room.Cost, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Left" Margin="262,230,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.132,-0.379"/>
+        <Button Content="Добавить" Command="{Binding AddRoomCommand}" HorizontalAlignment="Left" Margin="179,296,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

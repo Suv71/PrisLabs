@@ -1,47 +1,64 @@
 ﻿using Hotel.Commands;
 using Model;
-using Model.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
+using DAL.Interfaces;
 
 namespace Hotel.ViewModels
 {
     public class AddRoomViewModel : INotifyPropertyChanged
     {
-        private MainViewModel _mainViewModel;
+        private readonly MainViewModel _mainViewModel;
+        private readonly IRoomTypeRepository _roomTypeRepository;
 
         public Room Room { get; set; }
-
-        public IEnumerable<RoomTypes> RoomTypeValues { get; set; }
+        public IEnumerable<RoomType> RoomTypeValues { get; set; }
         public IEnumerable<int> CapacityValues { get; set; }
+        public Action CloseAction { get; set; }
+        public SimpleCommand AddRoomCommand { get; set; }
 
-        private SimpleCommand _addRoomCommand;
-        public SimpleCommand AddRoomCommand => _addRoomCommand ??
-                    (_addRoomCommand = new SimpleCommand(
-                        obj =>
-                        {
-                            _mainViewModel.Rooms.Add(Room);
-                            
-                        }));
-
-        public AddRoomViewModel(MainViewModel mainViewModel)
+        public AddRoomViewModel(MainViewModel mainViewModel, IRoomTypeRepository roomTypeRepository)
         {
-            Room = new Room();
             _mainViewModel = mainViewModel;
-            RoomTypeValues = new List<RoomTypes>()
+            _roomTypeRepository = roomTypeRepository;
+
+            Room = new Room
             {
-                RoomTypes.Standard,
-                RoomTypes.SemiLuxe,
-                RoomTypes.Luxe
+                Number = 1
             };
-            CapacityValues = new List<int>()
+            RoomTypeValues = _roomTypeRepository.GetAll();
+            CapacityValues = new List<int>
             {
                 1, 2, 3, 4
             };
+
+            AddRoomCommand = new SimpleCommand(c => AddRoom());
+        }
+
+        private void AddRoom()
+        {
+            var rooms = _mainViewModel.Rooms;
+            if (rooms.All(r => r.Number != Room.Number))
+            {
+                Room.RoomType = _roomTypeRepository.GetById(Room.RoomTypeId);
+                rooms.Add(Room);
+            }
+            else
+            {
+                MessageBox.Show("Комната с таким номером уже существует!");
+                return;
+            }
+            CloseAction();
+        }
+
+        public void UpdateCost()
+        {
+            var selectedRoomType = _roomTypeRepository.GetById(Room.RoomTypeId);
+            Room.Cost = Room.Capacity * selectedRoomType.BaseCost;
+            OnPropertyChanged("Room");
         }
 
         private void OnPropertyChanged(string propertyName = "")

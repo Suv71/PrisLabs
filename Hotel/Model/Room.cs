@@ -15,8 +15,12 @@ namespace Model
         public RoomTypes RoomTypeId { get; set; }
         public double Cost { get; set; }
 
+
+        public RoomType RoomType { get; set; }
+
         public Room()
         {
+            Id = Guid.NewGuid();
         }
     }
 }

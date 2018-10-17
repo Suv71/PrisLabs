@@ -10,17 +10,17 @@
         <TabControl HorizontalAlignment="Left" Height="400" VerticalAlignment="Top" Width="772" Margin="10,0,0,0">
             <TabItem Header="Комнаты">
                 <Grid>
-                    <DataGrid Margin="0,0,0,50" AutoGenerateColumns="False" ItemsSource="{Binding Rooms}">
+                    <DataGrid Margin="0,0,0,50" AutoGenerateColumns="False" ItemsSource="{Binding Rooms}" SelectedItem="{Binding Path=SelectedRoom, UpdateSourceTrigger=PropertyChanged}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Номер" Binding="{Binding Path=Number}" Width="50" />
                             <DataGridTextColumn Header="Вместимость" Binding="{Binding Path=Capacity}" Width="90" />
-                            <DataGridTextColumn Header="Тип" Binding="{Binding Path=RoomType}" Width="50" />
+                            <DataGridTextColumn Header="Тип" Binding="{Binding Path=RoomType.Title}" Width="70" />
                             <DataGridTextColumn Header="Стоимость" Binding="{Binding Path=Cost}" Width="70" />
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Добавить" Command="{Binding AddRoomCommand}" HorizontalAlignment="Left" Margin="50,327,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Добавить" Command="{Binding OpenAddRoomWindowCommand}" HorizontalAlignment="Left" Margin="50,327,0,0" VerticalAlignment="Top" Width="75"/>
                     <Button Content="Редактировать" HorizontalAlignment="Left" Margin="330,327,0,0" VerticalAlignment="Top" Width="94"/>
-                    <Button Content="Удалить" HorizontalAlignment="Left" Margin="654,327,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Удалить" Command="{Binding DeleteRoomCommand}" HorizontalAlignment="Left" Margin="654,327,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Заказы">
