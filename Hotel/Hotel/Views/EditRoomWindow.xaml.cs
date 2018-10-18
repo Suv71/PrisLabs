@@ -6,11 +6,11 @@ using Hotel.ViewModels.Rooms;
 namespace Hotel.Views
 {
     /// <summary>
-    /// Interaction logic for AddRoomWindow.xaml
+    /// Interaction logic for EditRoomWindow.xaml
     /// </summary>
-    public partial class AddRoomWindow : Window
+    public partial class EditRoomWindow : Window
     {
-        public AddRoomWindow()
+        public EditRoomWindow()
         {
             InitializeComponent();
         }
@@ -27,7 +27,7 @@ namespace Hotel.Views
 
         private void ComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (DataContext is AddRoomViewModel viewModel) viewModel.UpdateCost();
+            if (DataContext is EditRoomViewModel viewModel) viewModel.UpdateCost();
         }
     }
 }

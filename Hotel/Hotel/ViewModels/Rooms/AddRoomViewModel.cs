@@ -1,17 +1,15 @@
-﻿using Hotel.Commands;
-using Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using DAL.Interfaces;
+using Hotel.Commands;
+using Model;
 
-namespace Hotel.ViewModels
+namespace Hotel.ViewModels.Rooms
 {
-    public class AddRoomViewModel : INotifyPropertyChanged
+    public class AddRoomViewModel : BaseViewModel
     {
-        private readonly MainViewModel _mainViewModel;
+        private readonly RoomsTabViewModel _roomTabViewModel;
         private readonly IRoomTypeRepository _roomTypeRepository;
 
         public Room Room { get; set; }
@@ -20,9 +18,9 @@ namespace Hotel.ViewModels
         public Action CloseAction { get; set; }
         public SimpleCommand AddRoomCommand { get; set; }
 
-        public AddRoomViewModel(MainViewModel mainViewModel, IRoomTypeRepository roomTypeRepository)
+        public AddRoomViewModel(RoomsTabViewModel roomTabViewModel, IRoomTypeRepository roomTypeRepository)
         {
-            _mainViewModel = mainViewModel;
+            _roomTabViewModel = roomTabViewModel;
             _roomTypeRepository = roomTypeRepository;
 
             Room = new Room
@@ -40,32 +38,25 @@ namespace Hotel.ViewModels
 
         private void AddRoom()
         {
-            var rooms = _mainViewModel.Rooms;
-            if (rooms.All(r => r.Number != Room.Number))
+            var rooms = _roomTabViewModel.Rooms;
+            try
             {
-                Room.RoomType = _roomTypeRepository.GetById(Room.RoomTypeId);
+                _roomTabViewModel.RoomService.Add(Room);
                 rooms.Add(Room);
+                CloseAction();
             }
-            else
+            catch(InvalidOperationException e)
             {
-                MessageBox.Show("Комната с таким номером уже существует!");
-                return;
+                MessageBox.Show(e.Message);
             }
-            CloseAction();
         }
 
         public void UpdateCost()
         {
             var selectedRoomType = _roomTypeRepository.GetById(Room.RoomTypeId);
             Room.Cost = Room.Capacity * selectedRoomType.BaseCost;
+            Room.RoomType = selectedRoomType;
             OnPropertyChanged("Room");
         }
-
-        private void OnPropertyChanged(string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

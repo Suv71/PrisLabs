@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Model;
 
 namespace BLL.Interfaces
 {
     public interface IOrderService
     {
+        void Add(Order order);
+
+        void Update(Guid orderId, Order order);
+
+        void Delete(Guid orderId);
+
+        IEnumerable<Order> GetAll();
     }
 }
