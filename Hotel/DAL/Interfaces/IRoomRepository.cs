@@ -13,5 +13,7 @@ namespace DAL.Interfaces
         void Delete(Guid roomId);
 
         IEnumerable<Room> GetAll();
+
+        Room GetById(Guid id);
     }
 }

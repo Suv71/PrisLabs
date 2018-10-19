@@ -73,5 +73,10 @@ namespace DAL.Implementation
         {
             return _rooms;
         }
+
+        public Room GetById(Guid id)
+        {
+            return _rooms.Single(x => x.Id == id);
+        }
     }
 }

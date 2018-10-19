@@ -10,6 +10,8 @@ namespace Model
         public DateTime LeavedDate { get; set; }
         public bool IsActive { get; set; }
 
+        public Room Room { get; set; }
+
         public Order()
         {
         }

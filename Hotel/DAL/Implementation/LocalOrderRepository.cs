@@ -10,9 +10,27 @@ namespace DAL.Implementation
     {
         private readonly List<Order> _orders;
 
-        public LocalOrderRepository()
+        public LocalOrderRepository(IRoomRepository roomsRepository)
         {
-            _orders = new List<Order>();
+            _orders = new List<Order>
+            {
+                new Order
+                {
+                    Id = Guid.NewGuid(),
+                    RoomId = roomsRepository.GetAll().Single(r => r.Number == 1).Id,
+                    ArrivedDate = DateTime.Now,
+                    LeavedDate = DateTime.Now.AddDays(1),
+                    IsActive = true
+                },
+                new Order
+                {
+                    Id = Guid.NewGuid(),
+                    RoomId = roomsRepository.GetAll().Single(r => r.Number == 2).Id,
+                    ArrivedDate = DateTime.Now.AddDays(1),
+                    LeavedDate = DateTime.Now.AddDays(2),
+                    IsActive = true
+                }
+            };
         }
 
         public IEnumerable<Order> GetAll()

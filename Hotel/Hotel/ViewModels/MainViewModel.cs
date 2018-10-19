@@ -14,10 +14,10 @@ namespace Hotel.ViewModels
         {
             var roomTypesRepository = new LocalRoomTypeRepository();
             var roomsRepository = new LocalRoomRepository(roomTypesRepository);
-            var ordersRepository = new LocalOrderRepository();
+            var ordersRepository = new LocalOrderRepository(roomsRepository);
 
             RoomsTabVM = new RoomsTabViewModel(roomsRepository, roomTypesRepository);
-            OrdersTabVM = new OrdersTabViewModel();
+            OrdersTabVM = new OrdersTabViewModel(roomsRepository, ordersRepository);
         }
     }
 }

@@ -25,10 +25,16 @@
             </TabItem>
             <TabItem Header="Заказы">
                 <Grid>
-                    <DataGrid Margin="0,0,0,50"/>
-                    <Button Content="Добавить" HorizontalAlignment="Left" Margin="50,327,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button Content="Редактировать" HorizontalAlignment="Left" Margin="330,327,0,0" VerticalAlignment="Top" Width="94"/>
-                    <Button Content="Удалить" HorizontalAlignment="Left" Margin="654,327,0,0" VerticalAlignment="Top" Width="75"/>
+                    <DataGrid Margin="0,0,0,50" AutoGenerateColumns="False" ItemsSource="{Binding Path=OrdersTabVM.Orders, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding Path=OrdersTabVM.SelectedOrder, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Номер" Binding="{Binding Path=Room.Number}" Width="50" />
+                            <DataGridTextColumn Header="Дата заезда" Binding="{Binding Path=ArrivedDate}" Width="150" />
+                            <DataGridTextColumn Header="Дата выезда" Binding="{Binding Path=LeavedDate}" Width="150" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Добавить" Command="{Binding Path=OrdersTabVM.OpenAddOrderWindowCommand}" HorizontalAlignment="Left" Margin="50,327,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Редактировать" Command="{Binding Path=OrdersTabVM.OpenEditOrderWindowCommand}" HorizontalAlignment="Left" Margin="330,327,0,0" VerticalAlignment="Top" Width="94"/>
+                    <Button Content="Удалить" Command="{Binding Path=OrdersTabVM.DeleteOrderCommand}" HorizontalAlignment="Left" Margin="654,327,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </TabItem>
         </TabControl>
