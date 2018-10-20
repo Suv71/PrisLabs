@@ -1,0 +1,21 @@
+﻿<Window x:Class="Hotel.Views.AddOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hotel.Views"
+        mc:Ignorable="d"
+        Title="Добавление заказа" Height="368.067" Width="433.193">
+    <Grid>
+        <Label Content="Дата выезда" HorizontalAlignment="Left" Margin="63,168,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747" />
+        <Label Content="Дата заезда" HorizontalAlignment="Left" Margin="63,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747"/>
+        <Label Content="Номер комнаты" HorizontalAlignment="Left" Margin="63,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747"/>
+        <Label Content="Стоимость заказа" HorizontalAlignment="Left" Margin="63,230,0,0" VerticalAlignment="Top"/>
+
+        <Button Content="Добавить" Command="{Binding AddOrderCommand}" HorizontalAlignment="Left" Margin="179,296,0,0" VerticalAlignment="Top" Width="75"/>
+        <ComboBox HorizontalAlignment="Left" Margin="247,51,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Rooms}" SelectedValuePath="Id" SelectedValue="{Binding Order.RoomId, Mode=OneWayToSource}" DisplayMemberPath="Number" SelectedIndex="0" SelectionChanged="ComboBox_OnSelectionChanged"/>
+        <DatePicker SelectedDate="{Binding Order.ArrivedDate}" SelectedDateChanged="ComboBox_OnSelectionChanged" HorizontalAlignment="Left" Margin="247,108,0,0" VerticalAlignment="Top" Width="120"/>
+        <DatePicker SelectedDate="{Binding Order.LeavedDate}" SelectedDateChanged="ComboBox_OnSelectionChanged" HorizontalAlignment="Left" Margin="247,168,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="{Binding Cost, Mode=TwoWay}" HorizontalAlignment="Left" Margin="247,230,0,0" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>

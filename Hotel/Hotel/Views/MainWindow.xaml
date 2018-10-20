@@ -27,9 +27,10 @@
                 <Grid>
                     <DataGrid Margin="0,0,0,50" AutoGenerateColumns="False" ItemsSource="{Binding Path=OrdersTabVM.Orders, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding Path=OrdersTabVM.SelectedOrder, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Номер" Binding="{Binding Path=Room.Number}" Width="50" />
+                            <DataGridTextColumn Header="Номер комнаты" Binding="{Binding Path=Room.Number}" Width="100" />
                             <DataGridTextColumn Header="Дата заезда" Binding="{Binding Path=ArrivedDate}" Width="150" />
                             <DataGridTextColumn Header="Дата выезда" Binding="{Binding Path=LeavedDate}" Width="150" />
+                            <DataGridCheckBoxColumn Header="Активность" Binding="{Binding Path=IsActive}" Width="80" />
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button Content="Добавить" Command="{Binding Path=OrdersTabVM.OpenAddOrderWindowCommand}" HorizontalAlignment="Left" Margin="50,327,0,0" VerticalAlignment="Top" Width="75"/>

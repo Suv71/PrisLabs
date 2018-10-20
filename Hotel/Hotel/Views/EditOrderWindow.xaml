@@ -1,0 +1,18 @@
+﻿<Window x:Class="Hotel.Views.EditOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hotel.Views"
+        mc:Ignorable="d"
+        Title="Редактирование заказа" Height="368.067" Width="433.193">
+    <Grid>
+        <Label Content="Активность" HorizontalAlignment="Left" Margin="63,168,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747" />
+        <Label Content="Дата выезда" HorizontalAlignment="Left" Margin="63,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747"/>
+        <Label Content="Дата приезда" HorizontalAlignment="Left" Margin="63,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747"/>
+        <DatePicker SelectedDate="{Binding EditedOrder.ArrivedDate}" HorizontalAlignment="Left" Margin="247,49,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.492,-2.579"/>
+        <DatePicker SelectedDate="{Binding EditedOrder.LeavedDate}" HorizontalAlignment="Left" Margin="247,115,0,0" VerticalAlignment="Top" Width="120"/>
+        <CheckBox IsChecked="{Binding EditedOrder.IsActive}" HorizontalAlignment="Left" Margin="247,168,0,0" VerticalAlignment="Top"/>
+        <Button Content="Сохранить" Command="{Binding UpdateOrderCommand}" HorizontalAlignment="Left" Margin="170,248,0,0" VerticalAlignment="Top" Width="75"/>
+    </Grid>
+</Window>

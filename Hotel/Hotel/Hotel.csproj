@@ -55,6 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\AddOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EditRoomWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,11 +81,19 @@
     </Compile>
     <Compile Include="Commands\SimpleCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Orders\AddOrderViewModel.cs" />
+    <Compile Include="ViewModels\Orders\EditOrderViewModel.cs" />
     <Compile Include="ViewModels\Orders\OrdersTabViewModel.cs" />
     <Compile Include="ViewModels\Rooms\AddRoomViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Rooms\EditRoomViewModel.cs" />
     <Compile Include="ViewModels\Rooms\RoomsTabViewModel.cs" />
+    <Compile Include="Views\AddOrderWindow.xaml.cs">
+      <DependentUpon>AddOrderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditOrderWindow.xaml.cs">
+      <DependentUpon>EditOrderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
     </Compile>

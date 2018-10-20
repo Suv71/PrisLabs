@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using DAL.Interfaces;
 using Hotel.Commands;
 using Model;
@@ -30,10 +31,12 @@ namespace Hotel.ViewModels.Rooms
 
             UpdateRoomCommand = new SimpleCommand(c => UpdateRoom());
         }
-
+ 
         void UpdateRoom()
         {
             _roomTabViewModel.RoomService.Update(EditedRoom.Id, EditedRoom);
+            var index = _roomTabViewModel.Rooms.IndexOf(_roomTabViewModel.SelectedRoom);
+            _roomTabViewModel.Rooms[index] = EditedRoom;
             _roomTabViewModel.SelectedRoom = EditedRoom;
             CloseAction();
         }

@@ -3,6 +3,7 @@ using BLL.Implementation;
 using BLL.Interfaces;
 using DAL.Interfaces;
 using Hotel.Commands;
+using Hotel.Views;
 using Model;
 
 namespace Hotel.ViewModels.Orders
@@ -53,12 +54,33 @@ namespace Hotel.ViewModels.Orders
 
         private void OpenAddOrderWindow()
         {
+            var addOrderWindow = new AddOrderWindow();
+            addOrderWindow.DataContext = new AddOrderViewModel(this, _ordersRepository, _roomsRepository)
+            {
+                CloseAction = addOrderWindow.Close
+            };
+            addOrderWindow.Show();
         }
 
         private void OpenEditOrderWindow()
         {
             if (SelectedOrder != null)
             {
+                var editOrderWindow = new EditOrderWindow();
+                editOrderWindow.DataContext = new EditOrderViewModel(this)
+                {
+                    EditedOrder = new Order
+                    {
+                        Id = SelectedOrder.Id,
+                        ArrivedDate = SelectedOrder.ArrivedDate,
+                        LeavedDate = SelectedOrder.LeavedDate,
+                        IsActive = SelectedOrder.IsActive,
+                        RoomId = SelectedOrder.RoomId,
+                        Room = SelectedOrder.Room
+                    },
+                    CloseAction = editOrderWindow.Close
+                };
+                editOrderWindow.Show();
             }
         }
 
