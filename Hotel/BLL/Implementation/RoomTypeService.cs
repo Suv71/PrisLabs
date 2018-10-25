@@ -1,17 +1,14 @@
 ﻿using BLL.Interfaces;
 using DAL.Interfaces;
 using Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Model.Helper;
 
 namespace BLL.Implementation
 {
     public class RoomTypeService : IRoomTypeService
     {
-        private IRoomTypeRepository _roomTypeRepository;
+        private readonly IRoomTypeRepository _roomTypeRepository;
 
         public RoomTypeService(IRoomTypeRepository roomTypeRepository)
         {
@@ -21,6 +18,11 @@ namespace BLL.Implementation
         public IEnumerable<RoomType> GetAll()
         {
             return _roomTypeRepository.GetAll();
+        }
+
+        public RoomType GetById(RoomTypes id)
+        {
+            return _roomTypeRepository.GetById(id);
         }
     }
 }

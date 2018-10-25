@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using Hotel.ViewModels.Orders;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hotel.Views
 {
@@ -19,9 +9,21 @@ namespace Hotel.Views
     /// </summary>
     public partial class EditOrderWindow : Window
     {
+        private readonly IServiceScope _scope;
+
+        public EditOrderViewModel ViewModel { get; set; }
+
         public EditOrderWindow()
         {
             InitializeComponent();
+
+            _scope = AppServices.Instance.ServiceProvider.CreateScope();
+            Closed += (sender, e) => _scope.Dispose();
+
+            ViewModel = _scope.ServiceProvider.GetRequiredService<EditOrderViewModel>();
+            ViewModel.CloseAction = Close;
+
+            DataContext = ViewModel;
         }
     }
 }

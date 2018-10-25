@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using DAL.Interfaces;
+using BLL.Interfaces;
 using Hotel.Commands;
 using Model;
 
@@ -10,7 +10,7 @@ namespace Hotel.ViewModels.Rooms
     public class AddRoomViewModel : BaseViewModel
     {
         private readonly RoomsTabViewModel _roomTabViewModel;
-        private readonly IRoomTypeRepository _roomTypeRepository;
+        private readonly IRoomTypeService _roomTypeService;
 
         public Room Room { get; set; }
         public IEnumerable<RoomType> RoomTypeValues { get; set; }
@@ -18,16 +18,16 @@ namespace Hotel.ViewModels.Rooms
         public Action CloseAction { get; set; }
         public SimpleCommand AddRoomCommand { get; set; }
 
-        public AddRoomViewModel(RoomsTabViewModel roomTabViewModel, IRoomTypeRepository roomTypeRepository)
+        public AddRoomViewModel(RoomsTabViewModel roomTabViewModel, IRoomTypeService roomTypeService)
         {
             _roomTabViewModel = roomTabViewModel;
-            _roomTypeRepository = roomTypeRepository;
+            _roomTypeService = roomTypeService;
 
             Room = new Room
             {
                 Number = 1
             };
-            RoomTypeValues = _roomTypeRepository.GetAll();
+            RoomTypeValues = _roomTypeService.GetAll();
             CapacityValues = new List<int>
             {
                 1, 2, 3, 4
@@ -53,7 +53,7 @@ namespace Hotel.ViewModels.Rooms
 
         public void UpdateCost()
         {
-            var selectedRoomType = _roomTypeRepository.GetById(Room.RoomTypeId);
+            var selectedRoomType = _roomTypeService.GetById(Room.RoomTypeId);
             Room.Cost = Room.Capacity * selectedRoomType.BaseCost;
             Room.RoomType = selectedRoomType;
             OnPropertyChanged("Room");

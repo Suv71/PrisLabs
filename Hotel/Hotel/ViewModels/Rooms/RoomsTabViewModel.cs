@@ -1,7 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using BLL.Implementation;
 using BLL.Interfaces;
-using DAL.Interfaces;
 using Hotel.Commands;
 using Hotel.Views;
 using Model;
@@ -10,12 +8,11 @@ namespace Hotel.ViewModels.Rooms
 {
     public class RoomsTabViewModel : BaseViewModel
     {
-        private readonly IRoomTypeRepository _roomTypesRepository;
         private Room _selectedRoom;
 
-        public IRoomService RoomService;
-
         public ObservableCollection<Room> Rooms { get; set; }
+
+        public IRoomService RoomService { get; }
 
         public Room SelectedRoom
         {
@@ -33,10 +30,9 @@ namespace Hotel.ViewModels.Rooms
 
         public SimpleCommand DeleteRoomCommand { get; set; }
 
-        public RoomsTabViewModel(IRoomRepository roomsRepository, IRoomTypeRepository roomTypesRepository)
+        public RoomsTabViewModel(IRoomService roomService, IRoomTypeService roomTypesService)
         {
-            _roomTypesRepository = roomTypesRepository;
-            RoomService = new RoomService(roomsRepository);
+            RoomService = roomService;
             Rooms = new ObservableCollection<Room>(RoomService.GetAll());
             OpenAddRoomWindowCommand = new SimpleCommand(c => OpenAddRoomWindow());
             OpenEditRoomWindowCommand = new SimpleCommand(c => OpenEditRoomWindow());
@@ -44,7 +40,7 @@ namespace Hotel.ViewModels.Rooms
 
             foreach (var room in Rooms)
             {
-                room.RoomType = roomTypesRepository.GetById(room.RoomTypeId);
+                room.RoomType = roomTypesService.GetById(room.RoomTypeId);
             }
         }
 
@@ -53,10 +49,6 @@ namespace Hotel.ViewModels.Rooms
         private void OpenAddRoomWindow()
         {
             var addRoomWindow = new AddRoomWindow();
-            addRoomWindow.DataContext = new AddRoomViewModel(this, _roomTypesRepository)
-            {
-                CloseAction = addRoomWindow.Close
-            };
             addRoomWindow.Show();
         }
 
@@ -65,19 +57,6 @@ namespace Hotel.ViewModels.Rooms
             if (SelectedRoom != null)
             {
                 var editRoomWindow = new EditRoomWindow();
-                editRoomWindow.DataContext = new EditRoomViewModel(this, _roomTypesRepository)
-                {
-                    EditedRoom = new Room
-                    {
-                        Id = SelectedRoom.Id,
-                        Capacity = SelectedRoom.Capacity,
-                        Cost = SelectedRoom.Cost,
-                        Number = SelectedRoom.Number,
-                        RoomTypeId = SelectedRoom.RoomTypeId,
-                        RoomType = SelectedRoom.RoomType
-                    },
-                    CloseAction = editRoomWindow.Close
-                };
                 editRoomWindow.Show();
             }
         }

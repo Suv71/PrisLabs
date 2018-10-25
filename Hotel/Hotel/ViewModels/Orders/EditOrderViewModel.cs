@@ -1,11 +1,6 @@
-﻿using DAL.Interfaces;
-using Hotel.Commands;
+﻿using Hotel.Commands;
 using Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hotel.ViewModels.Orders
 {
@@ -22,6 +17,16 @@ namespace Hotel.ViewModels.Orders
         {
             _ordersTabViewModel = ordersTabViewModel;
             //_orderRepository = orderRepository;
+
+            EditedOrder = new Order
+            {
+                Id = _ordersTabViewModel.SelectedOrder.Id,
+                ArrivedDate = _ordersTabViewModel.SelectedOrder.ArrivedDate,
+                LeavedDate = _ordersTabViewModel.SelectedOrder.LeavedDate,
+                IsActive = _ordersTabViewModel.SelectedOrder.IsActive,
+                RoomId = _ordersTabViewModel.SelectedOrder.RoomId,
+                Room = _ordersTabViewModel.SelectedOrder.Room
+            };
 
             UpdateOrderCommand = new SimpleCommand(c => UpdateOrder());
         }

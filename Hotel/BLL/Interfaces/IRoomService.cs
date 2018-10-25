@@ -13,5 +13,7 @@ namespace BLL.Interfaces
         void Delete(Guid roomId);
 
         IEnumerable<Room> GetAll();
+
+        Room GetById(Guid id);
     }
 }

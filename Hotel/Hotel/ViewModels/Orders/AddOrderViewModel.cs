@@ -1,20 +1,17 @@
-﻿using DAL.Interfaces;
-using Hotel.Commands;
+﻿using Hotel.Commands;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using BLL.Interfaces;
 
 namespace Hotel.ViewModels.Orders
 {
     public class AddOrderViewModel : BaseViewModel
     {
         private readonly OrdersTabViewModel _ordersTabViewModel;
-        private readonly IOrderRepository _orderRepository;
-        private readonly IRoomRepository _roomRepository;
+        private readonly IRoomService _roomService;
 
         public Order Order { get; set; }
         public double Cost { get; set; }
@@ -22,15 +19,14 @@ namespace Hotel.ViewModels.Orders
         public Action CloseAction { get; set; }
         public SimpleCommand AddOrderCommand { get; set; }
 
-        public AddOrderViewModel(OrdersTabViewModel ordersTabViewModel, IOrderRepository orderRepository, IRoomRepository roomRepository)
+        public AddOrderViewModel(OrdersTabViewModel ordersTabViewModel, IRoomService roomService)
         {
             _ordersTabViewModel = ordersTabViewModel;
-            _orderRepository = orderRepository;
-            _roomRepository = roomRepository;
+            _roomService = roomService;
 
             Cost = 0;
 
-            Rooms = _roomRepository.GetAll();
+            Rooms = _roomService.GetAll();
 
             Order = new Order
             {
@@ -48,7 +44,7 @@ namespace Hotel.ViewModels.Orders
             try
             {
                 _ordersTabViewModel.OrderService.Add(Order);
-                Order.Room = _roomRepository.GetById(Order.RoomId);
+                Order.Room = _roomService.GetById(Order.RoomId);
                 _ordersTabViewModel.Orders.Add(Order);
                 
                 CloseAction();
@@ -63,7 +59,7 @@ namespace Hotel.ViewModels.Orders
         {
             if (Order.LeavedDate > Order.ArrivedDate && Order.ArrivedDate != Order.LeavedDate)
             {
-                var selectedRoom = _roomRepository.GetById(Order.RoomId);
+                var selectedRoom = _roomService.GetById(Order.RoomId);
                 Cost = selectedRoom.Cost * (Order.LeavedDate - Order.ArrivedDate).TotalDays;
                 OnPropertyChanged("Cost");
             } 

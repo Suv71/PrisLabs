@@ -1,14 +1,13 @@
 ﻿using Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Model.Helper;
 
 namespace BLL.Interfaces
 {
     public interface IRoomTypeService
     {
         IEnumerable<RoomType> GetAll();
+
+        RoomType GetById(RoomTypes id);
     }
 }

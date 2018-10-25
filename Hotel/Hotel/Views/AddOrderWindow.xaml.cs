@@ -1,17 +1,7 @@
 ﻿using Hotel.ViewModels.Orders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hotel.Views
 {
@@ -20,14 +10,26 @@ namespace Hotel.Views
     /// </summary>
     public partial class AddOrderWindow : Window
     {
+        private readonly IServiceScope _scope;
+
+        public AddOrderViewModel ViewModel { get; set; }
+
         public AddOrderWindow()
         {
             InitializeComponent();
+
+            _scope = AppServices.Instance.ServiceProvider.CreateScope();
+            Closed += (sender, e) => _scope.Dispose();
+
+            ViewModel = _scope.ServiceProvider.GetRequiredService<AddOrderViewModel>();
+            ViewModel.CloseAction = Close;
+
+            DataContext = ViewModel;
         }
 
         private void ComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (DataContext is AddOrderViewModel viewModel) viewModel.UpdateCost();
+            ViewModel.UpdateCost();
         }
     }
 }

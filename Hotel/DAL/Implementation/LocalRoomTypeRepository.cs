@@ -1,17 +1,14 @@
 ﻿using DAL.Interfaces;
 using Model;
 using Model.Helper;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Implementation
 {
     public class LocalRoomTypeRepository : IRoomTypeRepository
     {
-        private IEnumerable<RoomType> _roomTypes;
+        private List<RoomType> _roomTypes;
 
         public LocalRoomTypeRepository()
         {

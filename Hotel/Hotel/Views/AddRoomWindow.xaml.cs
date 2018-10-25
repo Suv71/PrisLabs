@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using Hotel.ViewModels.Rooms;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hotel.Views
 {
@@ -10,9 +11,21 @@ namespace Hotel.Views
     /// </summary>
     public partial class AddRoomWindow : Window
     {
+        private readonly IServiceScope _scope;
+
+        public AddRoomViewModel ViewModel { get; set; }
+
         public AddRoomWindow()
         {
             InitializeComponent();
+
+            _scope = AppServices.Instance.ServiceProvider.CreateScope();
+            Closed += (sender, e) => _scope.Dispose();
+
+            ViewModel = _scope.ServiceProvider.GetRequiredService<AddRoomViewModel>();
+            ViewModel.CloseAction = Close;
+
+            DataContext = ViewModel;
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -27,7 +40,7 @@ namespace Hotel.Views
 
         private void ComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (DataContext is AddRoomViewModel viewModel) viewModel.UpdateCost();
+            ViewModel.UpdateCost();
         }
     }
 }

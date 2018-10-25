@@ -1,7 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using BLL.Implementation;
 using BLL.Interfaces;
-using DAL.Interfaces;
 using Hotel.Commands;
 using Hotel.Views;
 using Model;
@@ -10,8 +8,6 @@ namespace Hotel.ViewModels.Orders
 {
     public class OrdersTabViewModel : BaseViewModel
     {
-        private readonly IOrderRepository _ordersRepository;
-        private readonly IRoomRepository _roomsRepository;
         private Order _selectedOrder;
 
         public IOrderService OrderService;
@@ -34,11 +30,9 @@ namespace Hotel.ViewModels.Orders
 
         public SimpleCommand DeleteOrderCommand { get; set; }
 
-        public OrdersTabViewModel(IRoomRepository roomsRepository, IOrderRepository ordersRepository)
+        public OrdersTabViewModel(IRoomService roomsService, IOrderService ordersService)
         {
-            _roomsRepository = roomsRepository;
-            _ordersRepository = ordersRepository;
-            OrderService = new OrderService(ordersRepository);
+            OrderService = ordersService;
             Orders = new ObservableCollection<Order>(OrderService.GetAll());
             OpenAddOrderWindowCommand = new SimpleCommand(c => OpenAddOrderWindow());
             OpenEditOrderWindowCommand = new SimpleCommand(c => OpenEditOrderWindow());
@@ -46,19 +40,13 @@ namespace Hotel.ViewModels.Orders
 
             foreach (var order in Orders)
             {
-                order.Room = roomsRepository.GetById(order.RoomId);
+                order.Room = roomsService.GetById(order.RoomId);
             }
         }
-
-
 
         private void OpenAddOrderWindow()
         {
             var addOrderWindow = new AddOrderWindow();
-            addOrderWindow.DataContext = new AddOrderViewModel(this, _ordersRepository, _roomsRepository)
-            {
-                CloseAction = addOrderWindow.Close
-            };
             addOrderWindow.Show();
         }
 
@@ -67,19 +55,6 @@ namespace Hotel.ViewModels.Orders
             if (SelectedOrder != null)
             {
                 var editOrderWindow = new EditOrderWindow();
-                editOrderWindow.DataContext = new EditOrderViewModel(this)
-                {
-                    EditedOrder = new Order
-                    {
-                        Id = SelectedOrder.Id,
-                        ArrivedDate = SelectedOrder.ArrivedDate,
-                        LeavedDate = SelectedOrder.LeavedDate,
-                        IsActive = SelectedOrder.IsActive,
-                        RoomId = SelectedOrder.RoomId,
-                        Room = SelectedOrder.Room
-                    },
-                    CloseAction = editOrderWindow.Close
-                };
                 editOrderWindow.Show();
             }
         }

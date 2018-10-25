@@ -39,5 +39,10 @@ namespace BLL.Implementation
         {
             return _roomRepository.GetAll();
         }
+
+        public Room GetById(Guid id)
+        {
+            return _roomRepository.GetById(id);
+        }
     }
 }
