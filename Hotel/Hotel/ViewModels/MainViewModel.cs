@@ -1,4 +1,5 @@
-﻿using Hotel.ViewModels.Orders;
+﻿using DAL.Database;
+using Hotel.ViewModels.Orders;
 using Hotel.ViewModels.Rooms;
 
 namespace Hotel.ViewModels
@@ -9,10 +10,12 @@ namespace Hotel.ViewModels
 
         public OrdersTabViewModel OrdersTabVM { get; }
 
-        public MainViewModel(RoomsTabViewModel roomsTabVM, OrdersTabViewModel ordersTabVM)
+        public MainViewModel(RoomsTabViewModel roomsTabVM, OrdersTabViewModel ordersTabVM, DatabaseInitializer initializer)
         {
             RoomsTabVM = roomsTabVM;
             OrdersTabVM = ordersTabVM;
+
+            initializer.Initialize();
         }
     }
 }

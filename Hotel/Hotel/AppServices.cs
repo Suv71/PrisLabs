@@ -42,7 +42,9 @@ namespace Hotel
             services.AddDomainServices();
 
             //Repositiries
-            services.AddLocalRepositories();
+            //services.AddLocalRepositories();
+            services.AddDbRepositories();
+
 
             ServiceProvider = services.BuildServiceProvider();
         }
