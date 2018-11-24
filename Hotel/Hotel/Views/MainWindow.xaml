@@ -31,11 +31,29 @@
                             <DataGridTextColumn Header="Дата заезда" Binding="{Binding Path=ArrivedDate}" Width="150" />
                             <DataGridTextColumn Header="Дата выезда" Binding="{Binding Path=LeavedDate}" Width="150" />
                             <DataGridCheckBoxColumn Header="Активность" Binding="{Binding Path=IsActive}" Width="80" />
+                            <DataGridTextColumn Header="ФИО заказчика" Binding="{Binding Path=Person.FullName}" Width="150" />
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button Content="Добавить" Command="{Binding Path=OrdersTabVM.OpenAddOrderWindowCommand}" HorizontalAlignment="Left" Margin="50,327,0,0" VerticalAlignment="Top" Width="75"/>
                     <Button Content="Редактировать" Command="{Binding Path=OrdersTabVM.OpenEditOrderWindowCommand}" HorizontalAlignment="Left" Margin="330,327,0,0" VerticalAlignment="Top" Width="94"/>
                     <Button Content="Удалить" Command="{Binding Path=OrdersTabVM.DeleteOrderCommand}" HorizontalAlignment="Left" Margin="654,327,0,0" VerticalAlignment="Top" Width="75"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Посетители">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="73*"/>
+                        <ColumnDefinition Width="693*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid Margin="0,0,0,50" AutoGenerateColumns="False" ItemsSource="{Binding PersonsTabVM.Persons, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding PersonsTabVM.SelectedPerson, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" Width="200" />
+                            <DataGridTextColumn Header="Паспортные данные" Binding="{Binding PassportData}" Width="150" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Добавить" Command="{Binding PersonsTabVM.OpenAddPersonWindowCommand}" HorizontalAlignment="Left" Margin="50,327,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2"/>
+                    <Button Content="Редактировать" Command="{Binding PersonsTabVM.OpenEditPersonWindowCommand}" HorizontalAlignment="Left" Margin="257,327,0,0" VerticalAlignment="Top" Width="94" Grid.Column="1"/>
+                    <Button Content="Удалить" Command="{Binding PersonsTabVM.DeletePersonCommand}" HorizontalAlignment="Left" Margin="581,327,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
                 </Grid>
             </TabItem>
         </TabControl>

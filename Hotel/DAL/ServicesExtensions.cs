@@ -23,9 +23,10 @@ namespace DAL
             var dbConnectionString = "Host=localhost;Username=postgres;Password=root;Database=Pris.Hotel";
             services.AddDbContext<DatabaseContext>(options => options.UseNpgsql(dbConnectionString, o => o.MigrationsAssembly("DAL")));
 
-            services.AddScoped<IOrderRepository, DbOrderRepository>();
-            services.AddScoped<IRoomRepository, DbRoomRepository>();
-            services.AddScoped<IRoomTypeRepository, DbRoomTypeRepository>();
+            services.AddSingleton<IOrderRepository, DbOrderRepository>();
+            services.AddSingleton<IRoomRepository, DbRoomRepository>();
+            services.AddSingleton<IRoomTypeRepository, DbRoomTypeRepository>();
+            services.AddSingleton<IPersonRepository, DbPersonRepository>();
 
             services.AddScoped<DatabaseInitializer>();
 

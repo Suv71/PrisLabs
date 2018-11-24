@@ -24,6 +24,11 @@ namespace Model
 
         public Room Room { get; set; }
 
+        [ForeignKey(nameof(Person))]
+        public Guid PersonId { get; set; }
+
+        public Person Person { get; set; }
+
         public Order()
         {
             Id = Guid.NewGuid();

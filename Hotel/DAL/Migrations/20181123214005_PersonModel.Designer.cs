@@ -4,13 +4,14 @@ using DAL.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20181109190002_Initial")]
-    partial class Initial
+    [Migration("20181123214005_PersonModel")]
+    partial class PersonModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,13 +31,32 @@ namespace DAL.Migrations
 
                     b.Property<DateTime>("LeavedDate");
 
+                    b.Property<Guid>("PersonId");
+
                     b.Property<Guid>("RoomId");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PersonId");
+
                     b.HasIndex("RoomId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Model.Person", b =>
+                {
+                    b.Property<Guid>("Id");
+
+                    b.Property<string>("FullName")
+                        .IsRequired();
+
+                    b.Property<string>("PassportData")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Persons");
                 });
 
             modelBuilder.Entity("Model.Room", b =>
@@ -74,6 +94,11 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Model.Order", b =>
                 {
+                    b.HasOne("Model.Person", "Person")
+                        .WithMany("Orders")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Model.Room", "Room")
                         .WithMany("Orders")
                         .HasForeignKey("RoomId")

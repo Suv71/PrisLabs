@@ -3,6 +3,7 @@ using BLL;
 using DAL;
 using Hotel.ViewModels;
 using Hotel.ViewModels.Orders;
+using Hotel.ViewModels.Persons;
 using Hotel.ViewModels.Rooms;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -37,6 +38,10 @@ namespace Hotel
             services.AddSingleton<OrdersTabViewModel>();
             services.AddScoped<AddOrderViewModel>();
             services.AddScoped<EditOrderViewModel>();
+
+            services.AddSingleton<PersonsTabViewModel>();
+            services.AddScoped<AddPersonViewModel>();
+            services.AddScoped<EditPersonViewModel>();
 
             //Services
             services.AddDomainServices();

@@ -11,6 +11,7 @@ namespace BLL
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IRoomService, RoomService>();
             services.AddScoped<IRoomTypeService, RoomTypeService>();
+            services.AddScoped<IPersonService, PersonService>();
 
             return services;
         }

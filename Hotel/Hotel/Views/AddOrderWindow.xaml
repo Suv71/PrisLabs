@@ -7,15 +7,17 @@
         mc:Ignorable="d"
         Title="Добавление заказа" Height="368.067" Width="433.193">
     <Grid>
-        <Label Content="Дата выезда" HorizontalAlignment="Left" Margin="63,168,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747" />
-        <Label Content="Дата заезда" HorizontalAlignment="Left" Margin="63,106,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747"/>
-        <Label Content="Номер комнаты" HorizontalAlignment="Left" Margin="63,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747"/>
-        <Label Content="Стоимость заказа" HorizontalAlignment="Left" Margin="63,230,0,0" VerticalAlignment="Top"/>
+        <Label Content="Дата выезда" HorizontalAlignment="Left" Margin="63,126,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747" />
+        <Label Content="Дата заезда" HorizontalAlignment="Left" Margin="63,77,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747"/>
+        <Label Content="Номер комнаты" HorizontalAlignment="Left" Margin="63,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747"/>
+        <Label Content="Стоимость заказа" HorizontalAlignment="Left" Margin="63,174,0,0" VerticalAlignment="Top"/>
 
-        <Button Content="Добавить" Command="{Binding AddOrderCommand}" HorizontalAlignment="Left" Margin="179,296,0,0" VerticalAlignment="Top" Width="75"/>
-        <ComboBox HorizontalAlignment="Left" Margin="247,51,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Rooms}" SelectedValuePath="Id" SelectedValue="{Binding Order.RoomId, Mode=OneWayToSource}" DisplayMemberPath="Number" SelectedIndex="0" SelectionChanged="ComboBox_OnSelectionChanged"/>
-        <DatePicker SelectedDate="{Binding Order.ArrivedDate}" SelectedDateChanged="ComboBox_OnSelectionChanged" HorizontalAlignment="Left" Margin="247,108,0,0" VerticalAlignment="Top" Width="120"/>
-        <DatePicker SelectedDate="{Binding Order.LeavedDate}" SelectedDateChanged="ComboBox_OnSelectionChanged" HorizontalAlignment="Left" Margin="247,168,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="{Binding Cost, Mode=TwoWay}" HorizontalAlignment="Left" Margin="247,230,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Добавить" Command="{Binding AddPersonCommand}" HorizontalAlignment="Left" Margin="179,296,0,0" VerticalAlignment="Top" Width="75"/>
+        <ComboBox HorizontalAlignment="Left" Margin="247,27,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Rooms}" SelectedValuePath="Id" SelectedValue="{Binding Order.RoomId, Mode=OneWayToSource}" DisplayMemberPath="Number" SelectedIndex="0" SelectionChanged="ComboBox_OnSelectionChanged"/>
+        <DatePicker SelectedDate="{Binding Order.ArrivedDate}" SelectedDateChanged="ComboBox_OnSelectionChanged" HorizontalAlignment="Left" Margin="247,77,0,0" VerticalAlignment="Top" Width="120"/>
+        <DatePicker SelectedDate="{Binding Order.LeavedDate}" SelectedDateChanged="ComboBox_OnSelectionChanged" HorizontalAlignment="Left" Margin="247,127,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="{Binding Cost, Mode=TwoWay}" HorizontalAlignment="Left" Margin="247,174,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label Content="Заказчик" HorizontalAlignment="Left" Margin="63,221,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747" />
+        <ComboBox HorizontalAlignment="Left" Margin="152,221,0,0" VerticalAlignment="Top" Width="253" ItemsSource="{Binding Persons}" SelectedValuePath="Id" SelectedValue="{Binding Order.PersonId, Mode=OneWayToSource}" DisplayMemberPath="FullName" SelectedIndex="0"/>
     </Grid>
 </Window>

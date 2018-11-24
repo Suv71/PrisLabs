@@ -84,8 +84,8 @@
     <Reference Include="Microsoft.Extensions.Options, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Options.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.6.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.6\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
@@ -140,7 +140,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddPersonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EditOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditPersonWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -166,6 +174,9 @@
     <Compile Include="ViewModels\Orders\AddOrderViewModel.cs" />
     <Compile Include="ViewModels\Orders\EditOrderViewModel.cs" />
     <Compile Include="ViewModels\Orders\OrdersTabViewModel.cs" />
+    <Compile Include="ViewModels\Persons\AddPersonViewModel.cs" />
+    <Compile Include="ViewModels\Persons\EditPersonViewModel.cs" />
+    <Compile Include="ViewModels\Persons\PersonsTabViewModel.cs" />
     <Compile Include="ViewModels\Rooms\AddRoomViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Rooms\EditRoomViewModel.cs" />
@@ -173,8 +184,14 @@
     <Compile Include="Views\AddOrderWindow.xaml.cs">
       <DependentUpon>AddOrderWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddPersonWindow.xaml.cs">
+      <DependentUpon>AddPersonWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditOrderWindow.xaml.cs">
       <DependentUpon>EditOrderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditPersonWindow.xaml.cs">
+      <DependentUpon>EditPersonWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>

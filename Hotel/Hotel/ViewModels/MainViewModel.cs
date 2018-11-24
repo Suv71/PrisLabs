@@ -1,5 +1,6 @@
 ﻿using DAL.Database;
 using Hotel.ViewModels.Orders;
+using Hotel.ViewModels.Persons;
 using Hotel.ViewModels.Rooms;
 
 namespace Hotel.ViewModels
@@ -10,10 +11,13 @@ namespace Hotel.ViewModels
 
         public OrdersTabViewModel OrdersTabVM { get; }
 
-        public MainViewModel(RoomsTabViewModel roomsTabVM, OrdersTabViewModel ordersTabVM, DatabaseInitializer initializer)
+        public PersonsTabViewModel PersonsTabVM { get; }
+
+        public MainViewModel(RoomsTabViewModel roomsTabVM, OrdersTabViewModel ordersTabVM, PersonsTabViewModel personsTabVM, DatabaseInitializer initializer)
         {
             RoomsTabVM = roomsTabVM;
             OrdersTabVM = ordersTabVM;
+            PersonsTabVM = personsTabVM;
 
             initializer.Initialize();
         }

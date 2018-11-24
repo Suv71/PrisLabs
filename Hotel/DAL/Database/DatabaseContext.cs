@@ -11,6 +11,8 @@ namespace DAL.Database
 
         public virtual DbSet<RoomType> RoomTypes { get; set; }
 
+        public virtual DbSet<Person> Persons { get; set; }
+
         /// <summary/>
         public DatabaseContext(DbContextOptions options) : base(options)
         {}

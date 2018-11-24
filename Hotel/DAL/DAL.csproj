@@ -10,11 +10,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DAL</RootNamespace>
     <AssemblyName>DAL</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -101,8 +102,8 @@
     <Reference Include="Microsoft.Extensions.Options, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Options.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.6.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.6\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
@@ -226,7 +227,7 @@
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -244,17 +245,23 @@
     <Compile Include="Database\DatabaseInitializer.cs" />
     <Compile Include="Database\DesignTimeDbContextFactory.cs" />
     <Compile Include="Implementation\Database\DbOrderRepository.cs" />
+    <Compile Include="Implementation\Database\DbPersonRepository.cs" />
     <Compile Include="Implementation\Database\DbRoomRepository.cs" />
     <Compile Include="Implementation\Database\DbRoomTypeRepository.cs" />
     <Compile Include="Implementation\LocalOrderRepository.cs" />
     <Compile Include="Implementation\LocalRoomRepository.cs" />
     <Compile Include="Implementation\LocalRoomTypeRepository.cs" />
     <Compile Include="Interfaces\IOrderRepository.cs" />
+    <Compile Include="Interfaces\IPersonRepository.cs" />
     <Compile Include="Interfaces\IRoomRepository.cs" />
     <Compile Include="Interfaces\IRoomTypeRepository.cs" />
     <Compile Include="Migrations\20181109190002_Initial.cs" />
     <Compile Include="Migrations\20181109190002_Initial.designer.cs">
       <DependentUpon>20181109190002_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20181123214005_PersonModel.cs" />
+    <Compile Include="Migrations\20181123214005_PersonModel.designer.cs">
+      <DependentUpon>20181123214005_PersonModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DatabaseContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
