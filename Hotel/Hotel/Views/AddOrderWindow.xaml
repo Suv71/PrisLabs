@@ -12,7 +12,7 @@
         <Label Content="Номер комнаты" HorizontalAlignment="Left" Margin="63,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.399,1.747"/>
         <Label Content="Стоимость заказа" HorizontalAlignment="Left" Margin="63,174,0,0" VerticalAlignment="Top"/>
 
-        <Button Content="Добавить" Command="{Binding AddPersonCommand}" HorizontalAlignment="Left" Margin="179,296,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Добавить" Command="{Binding AddOrderCommand}" HorizontalAlignment="Left" Margin="179,296,0,0" VerticalAlignment="Top" Width="75"/>
         <ComboBox HorizontalAlignment="Left" Margin="247,27,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Rooms}" SelectedValuePath="Id" SelectedValue="{Binding Order.RoomId, Mode=OneWayToSource}" DisplayMemberPath="Number" SelectedIndex="0" SelectionChanged="ComboBox_OnSelectionChanged"/>
         <DatePicker SelectedDate="{Binding Order.ArrivedDate}" SelectedDateChanged="ComboBox_OnSelectionChanged" HorizontalAlignment="Left" Margin="247,77,0,0" VerticalAlignment="Top" Width="120"/>
         <DatePicker SelectedDate="{Binding Order.LeavedDate}" SelectedDateChanged="ComboBox_OnSelectionChanged" HorizontalAlignment="Left" Margin="247,127,0,0" VerticalAlignment="Top" Width="120"/>

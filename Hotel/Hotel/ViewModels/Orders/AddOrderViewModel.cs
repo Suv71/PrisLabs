@@ -53,6 +53,7 @@ namespace Hotel.ViewModels.Orders
                 Order.Room = _roomService.GetById(Order.RoomId);
                 Order.Person = _personService.GetById(Order.PersonId);
                 _ordersTabViewModel.Orders.Add(Order);
+                _ordersTabViewModel.ViewOrders.Add(Order);
                 
                 CloseAction();
             }
